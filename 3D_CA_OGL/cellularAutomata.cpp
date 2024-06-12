@@ -19,12 +19,18 @@ cellularAutomata::~cellularAutomata() {
     }
     delete grid;
     delete neighborGrid;
+    renderer->~Renderer();
+    delete renderer;
 }
 
 void cellularAutomata::choosePreset() {
     presetLoader loader;
     std::string choice = loader.showPresets();
     curPreset = loader.parsePreset(choice);
+}
+
+void cellularAutomata::startRenderer(const unsigned int w, const unsigned int h, const char* title) {
+    renderer = new Renderer(w, h, title);
 }
 
 void cellularAutomata::createGrids() {
@@ -82,15 +88,6 @@ bool inBounds(glm::vec3 pos, glm::vec3 gridSize) {
     return true;
 }
 
-glm::vec3 addVector(glm::vec3 v1, std::vector<int> v2) {
-    int x, y, z;
-    x = v1.x + v2[0];
-    y = v1.y + v2[1];
-    z = v1.z + v2[2];
-    glm::vec3 ret(x, y, z);
-    return ret;
-}
-
 void cellularAutomata::setNeighbors(cell cur) {
     if(cur.state != curPreset.numStates) return;
     for(glm::vec3 offset : neighborOffsets) {
@@ -129,38 +126,21 @@ void cellularAutomata::run() {
     createGrids();
     setStartingCells();
     neighborOffsets = curPreset.neighborType == 'M' ? MOORE : VON_NEUMANN;
-    //std::thread updateThread;
-    //bool updating = false;
-    //while(!WindowShouldClose()) {
-    //    // auto drawStart = std::chrono::high_resolution_clock::now();
-    //    if(!updating) {
-    //        renderer.draw(liveCells, curPreset.gridSize);
-    //    }else {
-    //        renderer.updateCamOnly(curPreset.gridSize);
-    //    }
+    while (!glfwWindowShouldClose(renderer->window)) {
+        // per-frame time logic
+        // --------------------
 
-    //    if(!updating) {
-    //        // start thread
-    //        updateThread = std::thread(&cellularAutomata::updateGrid, this);
-    //        updating = true;
-    //    }else {
-    //        // check if joinable set not updating
-    //        if(updateThread.joinable()) {
-    //            updateThread.join();
-    //            updating = false;
-    //        }
-    //    }
-        // auto drawEnd = std::chrono::high_resolution_clock::now();
+        // input
+        // -----
+        //processInput(window);
 
-        // auto updateStart = std::chrono::high_resolution_clock::now();
-        // updateGrid();
-        // auto updateEnd = std::chrono::high_resolution_clock::now();
+        // render
+        // ------
+        renderer->draw();
 
-        // auto drawTime = std::chrono::duration_cast<std::chrono::milliseconds>(drawEnd - drawStart);
-        // auto updateTime = std::chrono::duration_cast<std::chrono::milliseconds>(updateEnd - updateStart);
-
-        // std::cout<<"number cells: "<<static_cast<int>(liveCells.size())<<' ';
-        // std::cout<<"draw time: "<<drawTime.count()<<' ';
-        // std::cout<<"update time: "<<updateTime.count()<<'\n';
-    //}
+        
+        // glfw: poll IO events (keys pressed/released, mouse moved etc.)
+        // -------------------------------------------------------------------------------
+        glfwPollEvents();
+    }
 }

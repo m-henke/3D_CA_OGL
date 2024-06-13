@@ -90,15 +90,15 @@ bool inBounds(glm::vec3 pos, glm::vec3 gridSize) {
 
 void cellularAutomata::setNeighbors(cell cur) {
     if(cur.state != curPreset.numStates) return;
-    for(glm::vec3 offset : neighborOffsets) {
-        glm::vec3 tempPos = cur.pos + offset;
+    for (int i = 0; i < static_cast<int>(neighborOffsets.size()); i++) {
+        glm::vec3 tempPos = cur.pos + neighborOffsets[i];
         if(!inBounds(tempPos, curPreset.gridSize)) continue;
         neighborGrid[toInt(tempPos.y)][toInt(tempPos.x)][toInt(tempPos.z)]++;
     }
 }
 
 void cellularAutomata::updateGrid() {
-    for(cell Cell : liveCells) setNeighbors(Cell);
+    for (int i = 0; i < static_cast<int>(liveCells.size()); i++) setNeighbors(liveCells[i]);
     liveCells.clear();
     for(int i = 0; i < curPreset.gridSize.y; i++) {
         for(int j = 0; j < curPreset.gridSize.x; j++) {

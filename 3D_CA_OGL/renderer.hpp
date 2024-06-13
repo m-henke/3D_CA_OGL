@@ -7,6 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "shaderHandler.hpp"
+#include <vector>
 
 class Renderer {
 	private:
@@ -19,7 +20,7 @@ class Renderer {
 
 		Renderer(const unsigned int w, const unsigned int h, const char* title);
 		~Renderer();
-		void draw(glm::vec3 positions[]);
+		void draw(std::vector<glm::vec3> positions);
 };
 
 #endif // !RENDERER_H

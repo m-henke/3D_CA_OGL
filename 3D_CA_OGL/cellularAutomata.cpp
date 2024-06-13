@@ -127,8 +127,10 @@ void cellularAutomata::run() {
     setStartingCells();
     neighborOffsets = curPreset.neighborType == 'M' ? MOORE : VON_NEUMANN;
 
-    glm::vec3 positions[]{
-        glm::vec3(0.0f, 0.0f, 0.0f)
+    std::vector<glm::vec3> positions {
+        glm::vec3(50.0f, 50.0f, 50.0f),
+        glm::vec3(0.0f, 0.0f, 0.0f),
+        glm::vec3(99.0f, 99.0f, 99.0f)
     };
 
     while (!glfwWindowShouldClose(renderer->window)) {

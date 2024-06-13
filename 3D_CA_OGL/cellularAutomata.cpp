@@ -127,14 +127,6 @@ void cellularAutomata::run() {
     setStartingCells();
     neighborOffsets = curPreset.neighborType == 'M' ? MOORE : VON_NEUMANN;
 
-    std::cout << "Birth Range: " << curPreset.birthRange.size() << '\n';
-    for (int i = 0; i < static_cast<int>(curPreset.birthRange.size()); i++)
-        std::cout << curPreset.birthRange[i] << ' ';
-    std::cout << "\nSurvival Range: " << curPreset.surviveRange.size() << '\n';
-    for (int i = 0; i < static_cast<int>(curPreset.surviveRange.size()); i++)
-        std::cout << curPreset.surviveRange[i] << ' ';
-    std::cout << '\n';
-
     while (!glfwWindowShouldClose(renderer->window)) {
         // per-frame time logic
         // --------------------

@@ -32,18 +32,27 @@ Renderer::Renderer(const unsigned int w, const unsigned int h, const char* title
 	glEnable(GL_DEPTH_TEST);
 
 	// setup buffers
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
+	glGenVertexArrays(2, VAOs);
+	glGenBuffers(2, VBOs);
 
-	glBindVertexArray(VAO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	// filled cube
+	glBindVertexArray(VAOs[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);
-
 	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
+	// color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
 
+	// wireframe cube
+	glBindVertexArray(VAOs[1]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[1]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(wfCubeVertices), wfCubeVertices, GL_STATIC_DRAW);
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
 	// color attribute
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
@@ -58,6 +67,8 @@ Renderer::Renderer(const unsigned int w, const unsigned int h, const char* title
 }
 
 Renderer::~Renderer() {
+	glDeleteVertexArrays(2, VAOs);
+	glDeleteBuffers(2, VBOs);
 	cubeShader->~shaderHandler();
 	glfwTerminate();
 }
@@ -77,14 +88,19 @@ void Renderer::draw(glm::vec3 positions[]) {
 	cubeShader->setMat4("view", view);
 
 	// render boxes
-	glBindVertexArray(VAO);
-	for (unsigned int i = 0; i < 1; i++) {
-		// calculate the model matrix for each object and pass it to shader before drawing
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, positions[i]);
-		cubeShader->setMat4("model", model);
-	    glDrawArrays(GL_TRIANGLES, 0, 36);
-	}
+	//glBindVertexArray(VAO);
+	//for (unsigned int i = 0; i < 1; i++) {
+	//	// calculate the model matrix for each object and pass it to shader before drawing
+	//	glm::mat4 model = glm::mat4(1.0f);
+	//	model = glm::translate(model, positions[i]);
+	//	cubeShader->setMat4("model", model);
+	//    glDrawArrays(GL_TRIANGLES, 0, 36);
+	//}
+
+	// render wireframe boarder
+	glBindVertexArray(VAOs[1]);
+	cubeShader->setMat4("model", glm::mat4(1.0f));
+	glDrawArrays(GL_LINES, 0, wfCubeNumVertices);
 
 	glfwSwapBuffers(window);
 }

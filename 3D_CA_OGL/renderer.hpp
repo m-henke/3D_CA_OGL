@@ -12,7 +12,7 @@ class Renderer {
 	private:
 		shaderHandler* cubeShader;
 		const unsigned int width, height;
-		unsigned int VBO, VAO;
+		unsigned int VBOs[2], VAOs[2];
 
 	public:
 		GLFWwindow* window;

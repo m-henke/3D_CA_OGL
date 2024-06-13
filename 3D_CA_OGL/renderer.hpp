@@ -10,14 +10,17 @@
 
 class Renderer {
 	private:
+		shaderHandler* cubeShader;
+		shaderHandler* wfCubeShader;
 		const unsigned int width, height;
+		unsigned int VBO, VAO;
 
 	public:
 		GLFWwindow* window;
 
 		Renderer(const unsigned int w, const unsigned int h, const char* title);
 		~Renderer();
-		void draw();
+		void draw(glm::vec3 positions[]);
 };
 
 #endif // !RENDERER_H

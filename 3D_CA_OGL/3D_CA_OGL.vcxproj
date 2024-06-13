@@ -149,14 +149,17 @@
   <ItemGroup>
     <ClInclude Include="cell.hpp" />
     <ClInclude Include="cellularAutomata.hpp" />
+    <ClInclude Include="cube.hpp" />
     <ClInclude Include="neighborTypes.hpp" />
     <ClInclude Include="presetLoader.hpp" />
     <ClInclude Include="renderer.hpp" />
     <ClInclude Include="shaderHandler.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader1.frag" />
-    <None Include="shader1.vert" />
+    <None Include="cubeShader.frag" />
+    <None Include="cubeShader.vert" />
+    <None Include="wfCubeShader.frag" />
+    <None Include="wfCubeShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

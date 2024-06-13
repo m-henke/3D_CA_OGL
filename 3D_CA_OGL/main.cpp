@@ -4,12 +4,12 @@
 //void processInput(GLFWwindow* window);
 
 // settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1200;
+const unsigned int SCR_HEIGHT = 800;
 
 int main() {
     cellularAutomata app;
-    app.choosePreset();
+    //app.choosePreset();
     app.startRenderer(SCR_WIDTH, SCR_HEIGHT, "Testing");
     app.run();
     // glfw: initialize and configure

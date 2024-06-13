@@ -56,13 +56,20 @@
     <ClInclude Include="renderer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cube.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader1.frag">
+    <None Include="cubeShader.frag">
       <Filter>Shader Files</Filter>
     </None>
-    <None Include="shader1.vert">
+    <None Include="cubeShader.vert">
       <Filter>Shader Files</Filter>
     </None>
+    <None Include="wfCubeShader.frag">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="wfCubeShader.vert" />
   </ItemGroup>
 </Project>

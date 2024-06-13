@@ -73,7 +73,7 @@ Renderer::~Renderer() {
 	glfwTerminate();
 }
 
-void Renderer::draw(std::vector<glm::vec3> positions) {
+void Renderer::draw(std::vector<cell> positions) {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -93,7 +93,7 @@ void Renderer::draw(std::vector<glm::vec3> positions) {
 		// calculate the model matrix for each object and pass it to shader before drawing
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::scale(model, glm::vec3(0.01f));
-		model = glm::translate(model, -positions[i] + 49.5f);
+		model = glm::translate(model, -positions[i].pos + 49.5f);
 		cubeShader->setMat4("model", model);
 	    glDrawArrays(GL_TRIANGLES, 0, cubeNumVertices);
 	}

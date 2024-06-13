@@ -143,7 +143,7 @@ void cellularAutomata::run() {
 
         // render
         // ------
-        renderer->draw(positions);
+        renderer->draw(liveCells);
 
         
         // glfw: poll IO events (keys pressed/released, mouse moved etc.)

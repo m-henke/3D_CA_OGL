@@ -6,7 +6,7 @@ const unsigned int SCR_HEIGHT = 800;
 
 int main() {
     cellularAutomata app;
-    //app.choosePreset();
+    app.choosePreset();
     app.startRenderer(SCR_WIDTH, SCR_HEIGHT, "Testing");
     app.run();
     

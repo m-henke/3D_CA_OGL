@@ -11,7 +11,6 @@
 class Renderer {
 	private:
 		shaderHandler* cubeShader;
-		shaderHandler* wfCubeShader;
 		const unsigned int width, height;
 		unsigned int VBO, VAO;
 

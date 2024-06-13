@@ -50,23 +50,15 @@ Renderer::Renderer(const unsigned int w, const unsigned int h, const char* title
 
 	// load shaders
 	cubeShader = new shaderHandler("cubeShader.vert", "cubeShader.frag");
-	wfCubeShader = new shaderHandler("wfCubeShader.vert", "wfCubeShader.frag");
 
 	// set projection matrix
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
 	cubeShader->use();
 	cubeShader->setMat4("projection", projection);
-	wfCubeShader->use();
-	wfCubeShader->setMat4("projection", projection);
-	float barycentric
-	for (int i = 0; i < 162; i++) {
-
-	}
 }
 
 Renderer::~Renderer() {
 	cubeShader->~shaderHandler();
-	wfCubeShader->~shaderHandler();
 	glfwTerminate();
 }
 

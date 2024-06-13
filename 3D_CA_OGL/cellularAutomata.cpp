@@ -127,12 +127,6 @@ void cellularAutomata::run() {
     setStartingCells();
     neighborOffsets = curPreset.neighborType == 'M' ? MOORE : VON_NEUMANN;
 
-    std::vector<glm::vec3> positions {
-        glm::vec3(50.0f, 50.0f, 50.0f),
-        glm::vec3(0.0f, 0.0f, 0.0f),
-        glm::vec3(99.0f, 99.0f, 99.0f)
-    };
-
     while (!glfwWindowShouldClose(renderer->window)) {
         // per-frame time logic
         // --------------------
@@ -144,7 +138,6 @@ void cellularAutomata::run() {
         // render
         // ------
         renderer->draw(liveCells);
-
         
         // glfw: poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------

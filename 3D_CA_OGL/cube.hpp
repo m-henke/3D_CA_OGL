@@ -1,7 +1,7 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-// 24
+GLsizei wfCubeNumVertices = 24;
 float wfCubeVertices[] = {
     -0.5f, -0.5f, -0.5f,   0.3f, 0.5f, 0.6f,
     0.5f, -0.5f, -0.5f,   0.3f, 0.5f, 0.6f,
@@ -40,7 +40,7 @@ float wfCubeVertices[] = {
     -0.5f, -0.5f, 0.5f,   0.3f, 0.5f, 0.6f,
 };
 
-// 36
+GLsizei cubeNumVertices = 36;
 float cubeVertices[] = {
     -0.5f, -0.5f, -0.5f,  0.3f, 0.5f, 0.6f,
     0.5f, -0.5f, -0.5f,  0.3f, 0.5f, 0.6f,

@@ -91,9 +91,7 @@ bool inBounds(glm::vec3 pos, glm::vec3 gridSize) {
 void cellularAutomata::setNeighbors(cell cur) {
     if(cur.state != curPreset.numStates) return;
     for(glm::vec3 offset : neighborOffsets) {
-        cell tempCell = {cur.pos + offset, curPreset.numStates};
-        glm::vec3 tempPos = tempCell.pos;
-        cur.pos = cur.pos - offset;
+        glm::vec3 tempPos = cur.pos + offset;
         if(!inBounds(tempPos, curPreset.gridSize)) continue;
         neighborGrid[toInt(tempPos.y)][toInt(tempPos.x)][toInt(tempPos.z)]++;
     }
@@ -134,7 +132,7 @@ void cellularAutomata::run() {
         // input
         // -----
         //processInput(window);
-
+        
         // render
         // ------
         renderer->draw(liveCells);

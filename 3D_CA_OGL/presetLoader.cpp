@@ -71,12 +71,12 @@ void setRange(std::string line, std::vector<bool> &range) {
 
 void fillRange(char neighborType, std::vector<bool> &range) {
     // n = 6, m = 26
-    if(neighborType == 'N' && static_cast<int>(range.size()) < 6) {
-        int numToAdd = static_cast<int>(6 - range.size());
+    if(neighborType == 'N' && static_cast<int>(range.size()) <= 6) {
+        int numToAdd = static_cast<int>(6 - range.size()) + 1;
         for(int i = 0; i < numToAdd; i++)
             range.push_back(false);
-    }else if(neighborType == 'M' && static_cast<int>(range.size()) < 26) {
-        int numToAdd = static_cast<int>(26 - range.size());
+    }else if(neighborType == 'M' && static_cast<int>(range.size()) <= 26) {
+        int numToAdd = static_cast<int>(26 - range.size()) + 1;
         for(int i = 0; i < numToAdd; i++)
             range.push_back(false);
     }

@@ -30,6 +30,8 @@ Renderer::Renderer(const unsigned int w, const unsigned int h, const char* title
 
 	// configure opengl state
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_FRONT);
 
 	// setup buffers
 	glGenVertexArrays(2, VAOs);

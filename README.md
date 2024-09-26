@@ -2,5 +2,6 @@
 - Make sure the lights make the generated shape viewable to where you can see the different layers and not just look like a block of cubes (If you can't do this with lights figure out a way to color the cubes so they look good and not just random colors)<br/>
 - Fix the weird cubes looking like lines thing better than just not enabling face culling<br/>
 - Code cleanup (remove commented out code and change whatever else to make it look better)<br/>
+- Add more presets<br/>
 - Make it run faster<br/>
 - Add GUI?

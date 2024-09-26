@@ -30,8 +30,8 @@ Renderer::Renderer(const unsigned int w, const unsigned int h, const char* title
 
 	// configure opengl state
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_FRONT);
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_FRONT);
 
 	// setup buffers
 	glGenVertexArrays(2, VAOs);
@@ -90,8 +90,16 @@ void Renderer::draw(std::vector<cell> positions) {
 	view = glm::lookAt(glm::vec3(camX, 0.8f, camZ), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	cubeShader->setMat4("view", view);
 
+	// Set light position and color
+	glm::vec3 lightPos = glm::vec3(0.0f, 5.0f, 0.0f);
+	glm::vec3 lightColor = glm::vec3(0.0f, 0.0f, 1.0f) * 2.0f;
+	cubeShader->setVec3("lightPos", lightPos);
+	cubeShader->setVec3("lightColor", lightColor);
+
 	// render boxes
 	glBindVertexArray(VAOs[0]);
+	cubeShader->setVec3("cColor", glm::vec3{1.0f, 1.0f, 1.0f});
+	cubeShader->setBool("useLighting", true);
 	for (unsigned int i = 0; i < static_cast<int>(positions.size()); i++) {
 		// calculate the model matrix for each object and pass it to shader before drawing
 		glm::mat4 model = glm::mat4(1.0f);
@@ -103,7 +111,9 @@ void Renderer::draw(std::vector<cell> positions) {
 
 	// render wireframe boarder
 	glBindVertexArray(VAOs[1]);
+	cubeShader->setVec3("cColor", glm::vec3(0.22f, 1.0f, 0.08f));
 	cubeShader->setMat4("model", glm::mat4(1.0f));
+	cubeShader->setBool("useLighting", false);
 	glDrawArrays(GL_LINES, 0, wfCubeNumVertices);
 
 	glfwSwapBuffers(window);

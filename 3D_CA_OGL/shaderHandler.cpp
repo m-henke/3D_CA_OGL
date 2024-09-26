@@ -70,3 +70,7 @@ void shaderHandler::setMat4(const std::string& name, const glm::mat4& mat) const
 void shaderHandler::setVec3(const std::string& name, const glm::vec3& vec) const {
 	glUniform3fv(glGetUniformLocation(shaderProgram, name.c_str()), 1, &vec[0]);
 }
+
+void shaderHandler::setBool(const std::string& name, bool value) const {
+	glUniform1i(glGetUniformLocation(shaderProgram, name.c_str()), (int)value);
+}

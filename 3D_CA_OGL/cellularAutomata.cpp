@@ -125,22 +125,13 @@ void cellularAutomata::run() {
     setStartingCells();
     neighborOffsets = curPreset.neighborType == 'M' ? MOORE : VON_NEUMANN;
 
-    while (!glfwWindowShouldClose(renderer->window)) {
-        // per-frame time logic
-        // --------------------
-
-        // input
-        // -----
-        //processInput(window);
-        
+    while (!glfwWindowShouldClose(renderer->window)) {        
         // render
-        // ------
         auto rs = std::chrono::high_resolution_clock::now();
         renderer->draw(liveCells);
         auto re = std::chrono::high_resolution_clock::now();
 
         // update
-        // ------
         auto us = std::chrono::high_resolution_clock::now();
         updateGrid();
         auto ue = std::chrono::high_resolution_clock::now();
@@ -148,10 +139,8 @@ void cellularAutomata::run() {
         auto rt = std::chrono::duration_cast<std::chrono::milliseconds>(re - rs);
         auto ut = std::chrono::duration_cast<std::chrono::milliseconds>(ue - us);
 
-        std::cout << "Render Time: " << rt.count() << " Update Time: " << ut.count() << " Live Cells: " << static_cast<int>(liveCells.size()) << '\n';
+        //std::cout << "Render Time: " << rt.count() << " Update Time: " << ut.count() << " Live Cells: " << static_cast<int>(liveCells.size()) << '\n';
         
-        // glfw: poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
         glfwPollEvents();
     }
 }
